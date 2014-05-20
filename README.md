@@ -1,6 +1,4 @@
-# NAViewer
-
-**N**etwork **A**ctivity **Viewer**
+# NAViewer (Network Activity Viewer)
 
 The purpose of NAViewer is to provide web based visualition portal for Local Area Network (LAN) Activity.
 
