@@ -13,8 +13,11 @@ def saveData():
 
 	print request.method
 	log.append(data)
-
-	# TODO : Append received data to log file.
+	
+	logfile = open("log.txt", "a+")
+	logfile.write(str(log))
+	logfile.close()
+	# Append received data to log file.
 
 	html = ""
 	for e in log:
