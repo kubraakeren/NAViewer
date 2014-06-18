@@ -4,31 +4,26 @@ from receivedata import receiveData
 
 app = Flask(__name__)
 
-log = []
-
 @app.route('/', methods=['GET', 'POST'])
+
 def saveData():
 
-	data = request.get_json(force=True)
-
-	print request.method
-	log.append(data)
-	
-	logfile = open("log.txt", "a+")
-	logfile.write(str(log))
+	#data = request.get_json(force=True) | BadRequest hatasini almamak icin bu kismi asagidaki gibi yazdim
+	data = receiveData()	
+	logfile = open("log.txt", "a")
+	logfile.write(str(data))
 	logfile.close()
-	# Append received data to log file.
-
-	html = ""
-	for e in log:
-		html = "%s <p>%s</p>" % (html, e['dest'])
-
-	return "%s" % html
-
+	
+	return index()
+	
 def index():
-
-	# TODO : render log file as html
-	pass
+	
+	r_file = open("log.txt", "r")
+	html = ""
+	for e in r_file:
+		html = "%s <p>%s</p>" % (html, e[:]) ##Postlama islemi veri kaybetmeden calisiyor fakat html formati olarak duzenleme kisminda tam olarak istedigimi elde edemedim.
+		return "%s" % html 
 
 if __name__ == '__main__':
 	app.run(debug=True)
+
