@@ -9,23 +9,19 @@ log = []
 @app.route('/', methods=['GET', 'POST'])
 def saveData():
 
-	data = request.get_json(force=True)
-
-	print request.method
-	log.append(data)
-
-	# TODO : Append received data to log file.
-
-	html = ""
-	for e in log:
-		html = "%s <p>%s</p>" % (html, e['dest'])
-
-	return "%s" % html
+	data = request.get_json(force=True) 
+	with open('log.txt', 'a') as outfile:
+  	  json.dump(data, outfile)
+	
+	return index()
 
 def index():
 
-	# TODO : render log file as html
-	pass
+	r_file = open("log.txt", "r")		
+	html = ""
+	for e in r_file:
+		html = "%s <p>%s</p>" % (html, e[:]) 
+		return "%s" % html '
 
 if __name__ == '__main__':
 	app.run(debug=True)
