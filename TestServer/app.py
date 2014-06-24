@@ -32,9 +32,14 @@ def index():
 
     activity = mongo.db.netactivity.find()
 
-    html = ''
+    html = '<table width="80%">'
     for record in activity:
-        html = '%s<p>%s</p>\n' % (html, record)
+        html = html + '<tr>'
+        html = html + '<td>%s</td>' % record['proto']
+        html = html + '<td>%s</td>' % record['source']
+        html = html + '<td>%s</td>' % record['dest']
+        html = html + '</tr>'
+    html = html + '</table>'
 
     response = html
 
